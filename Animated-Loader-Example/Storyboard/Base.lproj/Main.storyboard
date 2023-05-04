@@ -24,16 +24,34 @@
                                     <constraint firstAttribute="width" secondItem="hmH-JJ-snU" secondAttribute="height" multiplier="1:1" id="A4A-QW-WMw"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phA-rS-cYv">
+                                <rect key="frame" x="230" y="723" width="86" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oq0-en-H2s">
+                                <rect key="frame" x="242.66666666666666" y="159" width="41.333333333333343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="oq0-en-H2s" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="EGd-ch-Nct"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="phA-rS-cYv" secondAttribute="bottom" constant="74" id="KFx-6F-pHQ"/>
                             <constraint firstItem="hmH-JJ-snU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="250" id="MTg-L9-cHu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oq0-en-H2s" secondAttribute="trailing" constant="109" id="RFH-Rq-0fh"/>
                             <constraint firstItem="hmH-JJ-snU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="XuR-A5-QGN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="phA-rS-cYv" secondAttribute="trailing" constant="77" id="j39-mp-sZx"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="locationIconImageView" destination="hmH-JJ-snU" id="tw3-zO-lDy"/>
+                        <outlet property="toLabel" destination="phA-rS-cYv" id="9Ra-A8-qbe"/>
+                        <outlet property="toTitleLabel" destination="oq0-en-H2s" id="bZe-H7-FGc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

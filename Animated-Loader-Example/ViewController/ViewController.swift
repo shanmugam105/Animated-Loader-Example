@@ -10,102 +10,102 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var locationIconImageView: UIImageView!
     
+    @IBOutlet weak var toTitleLabel: UILabel!
+    @IBOutlet weak var toLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
-        view.addLoader(move: locationIconImageView)
+        view.addLoader(toIcon: locationIconImageView, toTitle: toLabel, toSubtitle: toTitleLabel)
         print(locationIconImageView.center)
     }
 }
 
 extension UIView {
     private static var stopAnimate: Bool = false
-    func addLoader(move icon: UIImageView) {
-        lazy var baseView: UIView = {
-            let view: UIView = .init()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.backgroundColor = .white
-            return view
-        }()
+    private static var baseView: UIView = {
+        let view: UIView = .init()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
+        return view
+    }()
+    private static var subTitleLabel: UILabel = {
+        let label: UILabel = .init()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "We are finding your nearby restaurants"
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 14)
+        return label
+    }()
+    
+    private static var titleLabel: UILabel = {
+        let label: UILabel = .init()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Please wait"
+        label.font = .systemFont(ofSize: 17, weight: .semibold)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private static var iconView: UIImageView = {
+        let icon: UIImageView = .init()
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        icon.image = UIImage(named: "location_icon")
+        return icon
+    }()
+    
+    func addLoader(toIcon: UIImageView, toTitle: UILabel, toSubtitle: UILabel) {
         
-        self.addSubview(baseView)
+        self.addSubview(UIView.baseView)
         
         NSLayoutConstraint.activate([
-            baseView.topAnchor.constraint(equalTo: self.topAnchor),
-            baseView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            baseView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            baseView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            UIView.baseView.topAnchor.constraint(equalTo: self.topAnchor),
+            UIView.baseView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            UIView.baseView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            UIView.baseView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
         
-        lazy var containerStackView: UIStackView = {
-            let stackView: UIStackView = .init()
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            stackView.alignment = .center
-            stackView.distribution = .fill
-            stackView.spacing = 4.0
-            stackView.axis = .vertical
-            return stackView
-        }()
+        UIView.baseView.addSubview(UIView.iconView)
+        NSLayoutConstraint.activate([
+            UIView.iconView.widthAnchor.constraint(equalToConstant: 30),
+            UIView.iconView.heightAnchor.constraint(equalToConstant: 30),
+            UIView.iconView.centerXAnchor.constraint(equalTo: UIView.baseView.centerXAnchor),
+            UIView.iconView.centerYAnchor.constraint(equalTo: UIView.baseView.centerYAnchor, constant: -30),
+        ])
         
-        lazy var iconView: UIImageView = {
-            let icon: UIImageView = .init()
-            icon.translatesAutoresizingMaskIntoConstraints = false
-            icon.backgroundColor = .white
-            icon.image = UIImage(named: "location_icon")
-            return icon
-        }()
-        
-        containerStackView.addArrangedSubview(iconView)
+        UIView.baseView.addSubview(UIView.titleLabel)
         
         NSLayoutConstraint.activate([
-            iconView.widthAnchor.constraint(equalToConstant: 30),
-            iconView.heightAnchor.constraint(equalToConstant: 30),
+            UIView.titleLabel.topAnchor.constraint(equalTo: UIView.iconView.bottomAnchor, constant: 8),
+            UIView.titleLabel.leadingAnchor.constraint(equalTo: UIView.baseView.leadingAnchor, constant: 30),
+            UIView.titleLabel.centerXAnchor.constraint(equalTo: UIView.baseView.centerXAnchor)
         ])
         
-        baseView.addSubview(containerStackView)
+        UIView.baseView.addSubview(UIView.subTitleLabel)
+        
         NSLayoutConstraint.activate([
-            containerStackView.leadingAnchor.constraint(equalTo: baseView.leadingAnchor, constant: 30),
-            containerStackView.trailingAnchor.constraint(equalTo: baseView.trailingAnchor, constant: -30),
-            containerStackView.centerYAnchor.constraint(equalTo: baseView.centerYAnchor, constant: -15),
+            UIView.subTitleLabel.topAnchor.constraint(equalTo: UIView.titleLabel.bottomAnchor, constant: 8),
+            UIView.subTitleLabel.leadingAnchor.constraint(equalTo: UIView.titleLabel.leadingAnchor, constant: 30),
+            UIView.subTitleLabel.centerXAnchor.constraint(equalTo: UIView.titleLabel.centerXAnchor)
         ])
         
-        lazy var titleLabel: UILabel = {
-            let label: UILabel = .init()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.text = "Please wait"
-            label.font = .systemFont(ofSize: 17, weight: .semibold)
-            label.textAlignment = .center
-            return label
-        }()
+        UIView.iconView.animateBounce()
         
-        lazy var subTitleLabel: UILabel = {
-            let label: UILabel = .init()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.text = "We are finding your nearby restaurants"
-            label.numberOfLines = 2
-            label.textAlignment = .center
-            label.font = .systemFont(ofSize: 14)
-            return label
-        }()
-        
-        containerStackView.addArrangedSubview(titleLabel)
-        containerStackView.addArrangedSubview(subTitleLabel)
-        iconView.animateBounce()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            UIView.stopAnimate = true
-            baseView.backgroundColor = .clear
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                iconView.moveItem(to: icon)
-            }
-        }
     }
     
-    private func moveItem(to latestView: UIView) {
+    func removeLoader() {
+        UIView.stopAnimate = true
+        UIView.animate(withDuration: 1) {
+            UIView.baseView.backgroundColor = .clear
+        }
+        // UIView.iconView.moveItem(to: toIcon)
+        // UIView.titleLabel.moveItem(to: toTitle)
+        // UIView.subTitleLabel.moveItem(to: toSubtitle)
+    }
+    
+    private func moveItem(to center: UIView) {
         UIView.animate(withDuration: 1.0) {
-            // let point =
-            print(latestView.center)
-            // self.center = latestView.center
-            // self.layoutSubviews()
+            self.center = center.center
         }
     }
     
