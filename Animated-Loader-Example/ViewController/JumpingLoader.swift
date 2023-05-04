@@ -10,10 +10,11 @@ import UIKit
 protocol JumpingLoader where Self: UIViewController {
     func addLoader(icon: UIImage?, title: String, subtitle: String?)
     func finishLoader(to items: JumpingLoaderElements?)
+    func finishLoader(with icon: UIImage?)
     func finishLoader()
 }
 
-struct JumpingLoaderElements {
+public struct JumpingLoaderElements {
     let iconImageView: UIImageView?
     let titleLabel: UILabel?
     let subtitleLabel: UILabel?
@@ -27,7 +28,30 @@ extension JumpingLoader {
     private var baseView: UIView? {
         self.view.subviews.first { $0.accessibilityIdentifier == baseViewId }
     }
-    func finishLoader() {
+    
+    public func finishLoader(with icon: UIImage?) {
+        UIView.stopAnimate = true
+        guard
+            let icon,
+            let iconView = baseView?.subviews.first(where: { $0.accessibilityIdentifier == iconViewId }),
+            let iconImageView = iconView as? UIImageView
+        else { self.finishLoader(); return }
+        
+        UIView.transition(with: iconImageView, duration: 1.0, options: .transitionFlipFromLeft) {
+            iconImageView.image = icon
+        } completion: { _ in
+            UIView.animate(withDuration: 0.5) {
+                iconImageView.center.y -= 30
+                iconImageView.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0)
+                //iconImageView.
+            } completion: { _ in
+                self.finishLoader()
+            }
+        }
+    }
+    
+    /// This will just remove the loader view without animation
+    public func finishLoader() {
         UIView.animate(withDuration: 0.25) {
             self.baseView?.alpha = 0
         } completion: { _ in
@@ -35,9 +59,11 @@ extension JumpingLoader {
         }
     }
     
-    func finishLoader(to items: JumpingLoaderElements?) {
+    /// This remove loader and Move the elements to required place
+    /// - Parameter items: Loaders elements(Title, Subtitle, Icon) will be move to this `items`
+    public func finishLoader(to items: JumpingLoaderElements?) {
         UIView.stopAnimate = true
-        guard let items else { return }
+        guard let items else { finishLoader(); return }
         let iconView = baseView?.subviews.first { $0.accessibilityIdentifier == iconViewId }
         let titleView = baseView?.subviews.first { $0.accessibilityIdentifier == titleViewId }
         let subTitleView = baseView?.subviews.first { $0.accessibilityIdentifier == subTitleViewId }
@@ -67,7 +93,12 @@ extension JumpingLoader {
         }
     }
     
-    func addLoader(icon: UIImage?, title: String, subtitle: String?) {
+    /// Loader will be added
+    /// - Parameters:
+    ///   - icon: Loader's icon
+    ///   - title: Loader's title
+    ///   - subtitle: Loader's subtitle
+    public func addLoader(icon: UIImage?, title: String, subtitle: String?) {
         self.baseView?.removeFromSuperview()
         UIView.stopAnimate = false
         lazy var baseView: UIView = {

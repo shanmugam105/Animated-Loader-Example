@@ -17,7 +17,7 @@ class ViewController: UIViewController, JumpingLoader {
         // view.backgroundColor = .lightGray
     }
     
-    @IBAction func updateRestaurantAndAnimateTapped(_ sender: UIButton) {
+    @IBAction func updateTitleSubtitleIconTapped(_ sender: UIButton) {
         self.addLoader(
             icon: UIImage(named: "location_icon"),
             title: "Office",
@@ -31,15 +31,29 @@ class ViewController: UIViewController, JumpingLoader {
         }
     }
     
-    @IBAction func updateRestaurantTapped(_ sender: UIButton) {
+    @IBAction func startAndDismissTapped(_ sender: UIButton) {
         self.addLoader(
-            icon: UIImage(named: "location_icon"),
+            icon: UIImage(named: "salad_icon"),
             title: "Please wait",
             subtitle: "We are finding your nearby restaurants"
         )
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.finishLoader()
+            // self.finishLoader(with: UIImage(named: "success_icon"))
+        }
+    }
+    
+    @IBAction func showStatusTapped(_ sender: UIButton) {
+        self.addLoader(
+            icon: UIImage(named: "food_preparing_icon"),
+            title: "Please wait",
+            subtitle: "We are placing your order"
+        )
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let success: Bool = Bool.random()
+            self.finishLoader(with: UIImage(named: success ? "success_icon" : "sad_icon"))
         }
     }
 }
