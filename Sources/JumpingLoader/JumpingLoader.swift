@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol JumpingLoader where Self: UIViewController {
+public protocol JumpingLoader where Self: UIViewController {
     func addLoader(icon: UIImage?, title: String, subtitle: String?)
     func finishLoader(to items: JumpingLoaderElements?)
     func finishLoader(with icon: UIImage?)
@@ -18,6 +18,12 @@ public struct JumpingLoaderElements {
     let iconImageView: UIImageView?
     let titleLabel: UILabel?
     let subtitleLabel: UILabel?
+    
+    public init(iconImageView: UIImageView?, titleLabel: UILabel?, subtitleLabel: UILabel?) {
+        self.iconImageView = iconImageView
+        self.titleLabel = titleLabel
+        self.subtitleLabel = subtitleLabel
+    }
 }
 
 extension JumpingLoader {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JumpingLoader
 
 class ViewController: UIViewController, JumpingLoader {
     @IBOutlet weak var locationIconImageView: UIImageView!

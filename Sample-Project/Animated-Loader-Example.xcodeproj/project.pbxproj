@@ -12,7 +12,7 @@
 		5A16D3E72A023A3100260B67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A16D3E52A023A3100260B67 /* Main.storyboard */; };
 		5A16D3E92A023A3400260B67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A16D3E82A023A3400260B67 /* Assets.xcassets */; };
 		5A16D3EC2A023A3400260B67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A16D3EA2A023A3400260B67 /* LaunchScreen.storyboard */; };
-		5A16D3F82A03AEAB00260B67 /* JumpingLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A16D3F72A03AEAB00260B67 /* JumpingLoader.swift */; };
+		5A16D4132A03E8EA00260B67 /* JumpingLoader in Frameworks */ = {isa = PBXBuildFile; productRef = 5A16D4122A03E8EA00260B67 /* JumpingLoader */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +23,7 @@
 		5A16D3E82A023A3400260B67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5A16D3EB2A023A3400260B67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5A16D3ED2A023A3400260B67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5A16D3F72A03AEAB00260B67 /* JumpingLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingLoader.swift; sourceTree = "<group>"; };
+		5A16D40F2A03E83400260B67 /* JumpingLoader */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = JumpingLoader; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A16D4132A03E8EA00260B67 /* JumpingLoader in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,8 +41,10 @@
 		5A16D3D32A023A3100260B67 = {
 			isa = PBXGroup;
 			children = (
+				5A16D40E2A03E83400260B67 /* Packages */,
 				5A16D3DE2A023A3100260B67 /* Animated-Loader-Example */,
 				5A16D3DD2A023A3100260B67 /* Products */,
+				5A16D3FD2A03DFF700260B67 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,7 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				5A16D3E32A023A3100260B67 /* ViewController.swift */,
-				5A16D3F72A03AEAB00260B67 /* JumpingLoader.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -97,6 +99,21 @@
 				5A16D3DF2A023A3100260B67 /* AppDelegate.swift */,
 			);
 			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		5A16D3FD2A03DFF700260B67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5A16D40E2A03E83400260B67 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				5A16D40F2A03E83400260B67 /* JumpingLoader */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -115,6 +132,9 @@
 			dependencies = (
 			);
 			name = "Animated-Loader-Example";
+			packageProductDependencies = (
+				5A16D4122A03E8EA00260B67 /* JumpingLoader */,
+			);
 			productName = "Animated-Loader-Example";
 			productReference = 5A16D3DC2A023A3100260B67 /* Animated-Loader-Example.app */;
 			productType = "com.apple.product-type.application";
@@ -171,7 +191,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A16D3E42A023A3100260B67 /* ViewController.swift in Sources */,
-				5A16D3F82A03AEAB00260B67 /* JumpingLoader.swift in Sources */,
 				5A16D3E02A023A3100260B67 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +415,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5A16D4122A03E8EA00260B67 /* JumpingLoader */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = JumpingLoader;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5A16D3D42A023A3100260B67 /* Project object */;
 }
